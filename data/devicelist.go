@@ -1,12 +1,13 @@
 package data
 
 import (
-	"alexaquery/auth"
 	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
 	"sort"
+
+	"github.com/dannypeaky/alexaquery/auth"
 )
 
 type Device struct {

@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"alexaquery/storage"
+	"github.com/dannypeaky/alexaquery/storage"
 )
 
 type CookieData struct {

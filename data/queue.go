@@ -5,7 +5,7 @@ import (
 	"io"
 	"net/http"
 
-	"alexaquery/auth"
+	"github.com/dannypeaky/alexaquery/auth"
 )
 
 func GetQueue(client *http.Client, deviceSerialNumber string, deviceType string) error {

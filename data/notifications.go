@@ -1,10 +1,11 @@
 package data
 
 import (
-	"alexaquery/auth"
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/dannypeaky/alexaquery/auth"
 )
 
 func GetNotifications(client *http.Client, deviceSerialNumber string, deviceType string) {
