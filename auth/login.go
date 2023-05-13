@@ -6,7 +6,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 	"time"
 
@@ -28,7 +27,7 @@ type CookieData struct {
 	} `json:"response"`
 }
 
-func Login(client *http.Client, refreshToken string, clientUrl *url.URL, cookieFilePath string) {
+func Login(client *http.Client, refreshToken string, clientUrl *url.URL, cookieFilePath string) error {
 
 	// This is the data we will send in our post request
 	data := url.Values{}
@@ -43,8 +42,7 @@ func Login(client *http.Client, refreshToken string, clientUrl *url.URL, cookieF
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Println("ERROR: ", err)
-		os.Exit(1)
+		return fmt.Errorf("ERROR: %v", err)
 	}
 
 	body, _ := io.ReadAll(resp.Body)
@@ -112,13 +110,13 @@ func Login(client *http.Client, refreshToken string, clientUrl *url.URL, cookieF
 	}
 
 	if !csrfCookieExists {
-		fmt.Println("ERROR: no CSRF cookie received")
-		os.Exit(1)
+		return fmt.Errorf("ERROR: no CSRF cookie received")
 	}
 
 	err = storage.SaveCookiesToJSON(client.Jar, clientUrl, cookieFilePath)
 	if err != nil {
-		fmt.Println("ERROR: failed to save cookies to file:", err)
-		os.Exit(1)
+		return fmt.Errorf("ERROR: failed to save cookies to file: %v", err)
 	}
+
+	return nil
 }

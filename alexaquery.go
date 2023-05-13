@@ -22,7 +22,7 @@ func (c *QueryClient) Login(token string) {
 	auth.Login(c.Client, token, c.Url, c.CookiePath)
 }
 
-func (c *QueryClient) CheckStatus() (string, bool, error) {
+func (c *QueryClient) CheckStatus() (bool, error) {
 	return auth.CheckStatus(c.Client, c.Browser)
 }
 
@@ -38,16 +38,16 @@ func (c *QueryClient) SaveCookiesToJSON() error {
 	return storage.SaveCookiesToJSON(c.Client.Jar, c.Url, c.CookiePath)
 }
 
-func (c *QueryClient) GetDeviceList() error {
+func (c *QueryClient) GetDeviceList() ([]data.Device, error) {
 	return data.GetDeviceList(c.Client)
 }
 
-func (c *QueryClient) GetNotifications(deviceSerialNumber string, deviceType string) {
-	data.GetNotifications(c.Client, deviceSerialNumber, deviceType)
+func (c *QueryClient) GetNotifications(deviceSerialNumber string, deviceType string) ([]data.Notification, error) {
+	return data.GetNotifications(c.Client, deviceSerialNumber, deviceType)
 }
 
-func (c *QueryClient) GetQueue(deviceSerialNumber string, deviceType string) {
-	data.GetQueue(c.Client, deviceSerialNumber, deviceType)
+func (c *QueryClient) GetQueue(deviceSerialNumber string, deviceType string) (data.Queue, error) {
+	return data.GetQueue(c.Client, deviceSerialNumber, deviceType)
 }
 
 func NewQueryClient(cookiePath string) *QueryClient {

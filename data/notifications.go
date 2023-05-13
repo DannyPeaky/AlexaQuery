@@ -1,6 +1,7 @@
 package data
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -8,12 +9,11 @@ import (
 	"github.com/dannypeaky/alexaquery/auth"
 )
 
-func GetNotifications(client *http.Client, deviceSerialNumber string, deviceType string) {
+func GetNotifications(client *http.Client, deviceSerialNumber string, deviceType string) ([]Notification, error) {
 	url := fmt.Sprintf("https://alexa.amazon.co.uk/api/notifications?deviceSerialNumber=%s&deviceType=%s", deviceSerialNumber, deviceType)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		fmt.Println("Error creating request:", err)
-		return
+		return nil, err
 	}
 
 	// Set request headers
@@ -28,18 +28,22 @@ func GetNotifications(client *http.Client, deviceSerialNumber string, deviceType
 	// Send the request
 	resp, err := client.Do(req)
 	if err != nil {
-		fmt.Println("Error sending request:", err)
-		return
+		return nil, err
 	}
 	defer resp.Body.Close()
 
 	// Read the response
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Error reading response:", err)
-		return
+		return nil, err
+	}
+
+	var notifications Notifications
+	err = json.Unmarshal(body, &notifications)
+	if err != nil {
+		return nil, err
 	}
 
 	// Print the response body
-	fmt.Println(string(body))
+	return notifications.Notifications, nil
 }

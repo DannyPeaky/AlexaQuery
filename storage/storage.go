@@ -2,7 +2,6 @@ package storage
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 	"os"
@@ -92,8 +91,6 @@ func SaveCookiesToJSON(jar http.CookieJar, url *url.URL, filePath string) error 
 
 	// Iterate over all cookies
 	for _, cookie := range cookies {
-
-		fmt.Println(cookie.Secure, cookie.HttpOnly)
 
 		// Create a new Cookie struct
 		c := SaveCookie{

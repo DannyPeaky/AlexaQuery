@@ -2,7 +2,6 @@ package data
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"sort"
@@ -21,10 +20,10 @@ type DeviceList struct {
 	Devices []Device
 }
 
-func GetDeviceList(client *http.Client) error {
+func GetDeviceList(client *http.Client) ([]Device, error) {
 	req, err := http.NewRequest("GET", "https://alexa.amazon.co.uk/api/devices-v2/device?cached=false", nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	req.Header.Add("Content-Type", "application/json; charset=UTF-8")
 	req.Header.Add("Referer", "https://alexa.amazon.co.uk/spa/index.html")
@@ -33,20 +32,19 @@ func GetDeviceList(client *http.Client) error {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	var deviceList DeviceList
 	err = json.Unmarshal(body, &deviceList)
 	if err != nil {
-		fmt.Println("Error:", err)
-		return err
+		return nil, err
 	}
 
 	filteredDevices := make([]Device, 0)
@@ -60,9 +58,9 @@ func GetDeviceList(client *http.Client) error {
 		return filteredDevices[i].AccountName < filteredDevices[j].AccountName
 	})
 
-	for _, device := range filteredDevices {
-		fmt.Printf("%s=%s=%s=%s\n", device.AccountName, device.DeviceType, device.SerialNumber, device.DeviceFamily)
-	}
+	// for _, device := range filteredDevices {
+	// 	fmt.Printf("%s=%s=%s=%s\n", device.AccountName, device.DeviceType, device.SerialNumber, device.DeviceFamily)
+	// }
 
-	return nil
+	return filteredDevices, nil
 }
