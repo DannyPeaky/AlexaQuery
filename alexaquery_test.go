@@ -33,5 +33,5 @@ func TestQueryClient(t *testing.T) {
 
 	queue, err := client.GetQueue("G090LF1180340N01", "A3S5BH2HU6VAYF")
 	assert.Nil(t, err)
-	assert.IsType(t, queue, data.Queue{})
+	assert.IsType(t, queue, data.PlayerInfo{})
 }

@@ -9,12 +9,12 @@ import (
 	"github.com/dannypeaky/alexaquery/auth"
 )
 
-func GetQueue(client *http.Client, deviceSerialNumber string, deviceType string) (Queue, error) {
+func GetQueue(client *http.Client, deviceSerialNumber string, deviceType string) (PlayerInfo, error) {
 	url := fmt.Sprintf("https://alexa.amazon.co.uk/api/np/player?deviceSerialNumber=%s&deviceType=%s", deviceSerialNumber, deviceType)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return Queue{}, err
+		return PlayerInfo{}, err
 	}
 
 	// Set request headers
@@ -27,20 +27,20 @@ func GetQueue(client *http.Client, deviceSerialNumber string, deviceType string)
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return Queue{}, err
+		return PlayerInfo{}, err
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return Queue{}, err
+		return PlayerInfo{}, err
 	}
 
-	var queue Queue
-	err = json.Unmarshal(body, &queue)
+	var playerInfo PlayerInfo
+	err = json.Unmarshal(body, &playerInfo)
 	if err != nil {
-		return Queue{}, err
+		return PlayerInfo{}, err
 	}
 
-	return queue, nil
+	return playerInfo, nil
 }

@@ -58,9 +58,5 @@ func GetDeviceList(client *http.Client) ([]Device, error) {
 		return filteredDevices[i].AccountName < filteredDevices[j].AccountName
 	})
 
-	// for _, device := range filteredDevices {
-	// 	fmt.Printf("%s=%s=%s=%s\n", device.AccountName, device.DeviceType, device.SerialNumber, device.DeviceFamily)
-	// }
-
 	return filteredDevices, nil
 }

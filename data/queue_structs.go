@@ -1,63 +1,61 @@
 package data
 
-type Queue struct {
-	PlayerInfo struct {
-		InfoText       *InfoText     `json:"infoText,omitempty"`
-		MainArt        *MainArt      `json:"mainArt,omitempty"`
-		MediaId        *string       `json:"mediaId,omitempty"`
-		MiniInfoText   *MiniInfoText `json:"miniInfoText,omitempty"`
-		PlaybackSource *string       `json:"playbackSource,omitempty"`
-		Progress       *Progress     `json:"progress,omitempty"`
-		Provider       *Provider     `json:"provider,omitempty"`
-		State          *string       `json:"state,omitempty"`
-	} `json:"playerInfo"`
+type PlayerInfo struct {
+	InfoText       InfoText     `json:"infoText"`
+	MainArt        MainArt      `json:"mainArt"`
+	MediaId        string       `json:"mediaId"`
+	MiniInfoText   MiniInfoText `json:"miniInfoText"`
+	PlaybackSource string       `json:"playbackSource"`
+	Progress       Progress     `json:"progress"`
+	Provider       Provider     `json:"provider"`
+	State          string       `json:"state"`
 }
 
 type InfoText struct {
-	Header         *string `json:"header,omitempty"`
-	HeaderSubtext1 *string `json:"headerSubtext1,omitempty"`
-	MultiLineMode  bool    `json:"multiLineMode,omitempty"`
-	SubText1       *string `json:"subText1,omitempty"`
-	SubText2       *string `json:"subText2,omitempty"`
-	Title          *string `json:"title,omitempty"`
+	Header         string `json:"header"`
+	HeaderSubtext1 string `json:"headerSubtext1"`
+	MultiLineMode  bool   `json:"multiLineMode"`
+	SubText1       string `json:"subText1"`
+	SubText2       string `json:"subText2"`
+	Title          string `json:"title"`
 }
 
 type MainArt struct {
-	AltText     *string `json:"altText,omitempty"`
-	ContentType *string `json:"contentType,omitempty"`
-	ArtType     *string `json:"artType,omitempty"`
-	Url         *string `json:"url,omitempty"`
+	AltText     string `json:"altText"`
+	ContentType string `json:"contentType"`
+	ArtType     string `json:"artType"`
+	Url         string `json:"url"`
 }
 
 type MiniInfoText struct {
-	Header         *string `json:"header,omitempty"`
-	HeaderSubtext1 *string `json:"headerSubtext1,omitempty"`
-	MultiLineMode  bool    `json:"multiLineMode,omitempty"`
-	SubText1       *string `json:"subText1,omitempty"`
-	SubText2       *string `json:"subText2,omitempty"`
-	Title          *string `json:"title,omitempty"`
+	Header         string `json:"header"`
+	HeaderSubtext1 string `json:"headerSubtext1"`
+	MultiLineMode  bool   `json:"multiLineMode"`
+	SubText1       string `json:"subText1"`
+	SubText2       string `json:"subText2"`
+	Title          string `json:"title"`
 }
 
 type Progress struct {
-	AllowScrubbing bool    `json:"allowScrubbing,omitempty"`
-	LocationInfo   *string `json:"locationInfo,omitempty"`
-	MediaLength    *int    `json:"mediaLength,omitempty"`
-	MediaProgress  *int    `json:"mediaProgress,omitempty"`
-	ShowTiming     bool    `json:"showTiming,omitempty"`
-	Visible        bool    `json:"visible,omitempty"`
+	AllowScrubbing bool   `json:"allowScrubbing"`
+	LocationInfo   string `json:"locationInfo"`
+	MediaLength    int    `json:"mediaLength"`
+	MediaProgress  int    `json:"mediaProgress"`
+	ShowTiming     bool   `json:"showTiming"`
+	Visible        bool   `json:"visible"`
 }
 
 type Provider struct {
-	ArtOverlay          *string       `json:"artOverlay,omitempty"`
-	FallbackMainArt     *string       `json:"fallbackMainArt,omitempty"`
-	ProviderDisplayName *string       `json:"providerDisplayName,omitempty"`
-	ProviderLogo        *ProviderLogo `json:"providerLogo,omitempty"`
-	ProviderName        *string       `json:"providerName,omitempty"`
+	ArtOverlay          string       `json:"artOverlay"`
+	FallbackMainArt     string       `json:"fallbackMainArt"`
+	ProviderDisplayName string       `json:"providerDisplayName"`
+	ProviderLogo        ProviderLogo `json:"providerLogo"`
+	ProviderName        string       `json:"providerName"`
 }
 
 type ProviderLogo struct {
-	AltText     *string `json:"altText,omitempty"`
-	ArtType     *string `json:"artType,omitempty"`
-	ContentType *string `json:"contentType,omitempty"`
-	Url         *string `json:"url,omitempty"`
+	AltText     string `json:"altText"`
+	ArtType     string `json:"artType"`
+	ContentType string `json:"contentType"`
+	Url         string `json:"url"`
 }
