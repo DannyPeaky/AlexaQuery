@@ -1,5 +1,9 @@
 package data
 
+type Queue struct {
+	PlayerInfo PlayerInfo `json:"playerInfo"`
+}
+
 type PlayerInfo struct {
 	InfoText       InfoText     `json:"infoText"`
 	MainArt        MainArt      `json:"mainArt"`

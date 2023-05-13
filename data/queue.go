@@ -36,11 +36,11 @@ func GetQueue(client *http.Client, deviceSerialNumber string, deviceType string)
 		return PlayerInfo{}, err
 	}
 
-	var playerInfo PlayerInfo
-	err = json.Unmarshal(body, &playerInfo)
+	var queue Queue
+	err = json.Unmarshal(body, &queue)
 	if err != nil {
 		return PlayerInfo{}, err
 	}
 
-	return playerInfo, nil
+	return queue.PlayerInfo, nil
 }
