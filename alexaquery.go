@@ -42,8 +42,8 @@ func (c *QueryClient) GetDeviceList() ([]data.Device, error) {
 	return data.GetDeviceList(c.Client)
 }
 
-func (c *QueryClient) GetNotifications(deviceSerialNumber string, deviceType string) ([]data.Notification, error) {
-	return data.GetNotifications(c.Client, deviceSerialNumber, deviceType)
+func (c *QueryClient) GetNotifications() ([]data.Notification, error) {
+	return data.GetNotifications(c.Client)
 }
 
 func (c *QueryClient) GetQueue(deviceSerialNumber string, deviceType string) (data.PlayerInfo, error) {

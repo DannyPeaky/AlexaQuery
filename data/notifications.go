@@ -2,16 +2,14 @@ package data
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 
 	"github.com/dannypeaky/alexaquery/auth"
 )
 
-func GetNotifications(client *http.Client, deviceSerialNumber string, deviceType string) ([]Notification, error) {
-	url := fmt.Sprintf("https://alexa.amazon.co.uk/api/notifications?deviceSerialNumber=%s&deviceType=%s", deviceSerialNumber, deviceType)
-	req, err := http.NewRequest("GET", url, nil)
+func GetNotifications(client *http.Client) ([]Notification, error) {
+	req, err := http.NewRequest("GET", "https://alexa.amazon.co.uk/api/notifications", nil)
 	if err != nil {
 		return nil, err
 	}

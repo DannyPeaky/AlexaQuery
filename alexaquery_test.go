@@ -27,7 +27,7 @@ func TestQueryClient(t *testing.T) {
 	assert.Nil(t, err)
 	assert.IsType(t, devices, []data.Device{})
 
-	notifications, err := client.GetNotifications("G090LF1180340N01", "A3S5BH2HU6VAYF")
+	notifications, err := client.GetNotifications()
 	assert.Nil(t, err)
 	assert.IsType(t, notifications, []data.Notification{})
 
