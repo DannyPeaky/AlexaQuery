@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -92,9 +91,6 @@ func SaveCookiesToJSON(jar http.CookieJar, url *url.URL, filePath string) error 
 
 	// Iterate over all cookies
 	for _, cookie := range cookies {
-		// Remove preceding and trailing double quotes from the cookie value if they exist
-		cookie.Value = strings.Trim(cookie.Value, `" `)
-
 		// Create a new Cookie struct
 		c := SaveCookie{
 			Name:     cookie.Name,

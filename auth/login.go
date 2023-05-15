@@ -54,6 +54,8 @@ func Login(client *http.Client, refreshToken string, clientUrl *url.URL, cookieF
 	var cookiesToSave []*http.Cookie
 	for _, cookies := range cookieData.Response.Tokens.Cookies {
 		for _, cookie := range cookies {
+			// Trim double quotes from cookie value
+			cookie.Value = strings.Trim(cookie.Value, `" `)
 			// Parse the expiration date
 			expiration, _ := time.Parse(time.RFC1123, cookie.Expires)
 			// Create a new http.Cookie and add it to the jar
