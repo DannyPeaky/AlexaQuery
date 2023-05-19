@@ -1,7 +1,6 @@
 package alexaquery
 
 import (
-	"fmt"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
@@ -58,10 +57,6 @@ func NewQueryClient(cookiePath string) *QueryClient {
 		Browser:    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:1.0) bash-script/1.0",
 		CookiePath: cookiePath,
 		Url:        u,
-	}
-	err := client.LoadCookiesFromJSON()
-	if err != nil {
-		fmt.Println(err)
 	}
 	return &client
 }
